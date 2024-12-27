@@ -1,25 +1,35 @@
 import logo from './logo.svg';
 import './App.css';
+import { useState } from 'react';
+import Guru from'./Guru';
+import Date from'./Date';
 
-function App() {
+const App=()=> {
+  const[guru,setGuru]=useState(Date)
+  function removeGuru(id){
+    const newGuru=guru.filter((guru)=>{ return guru.id!==id} );
+    setGuru(newGuru);
+   }
+  
+  
+ 
+  if(guru.length===0){
+    return(
+      <div>
+        <h1 className='noguru'>No Guru Left</h1>
+        <button className='nbtn' onClick={()=>setGuru(Date)}>Refresh</button>
+      </div>
+    );
+  }
+
   return (
+  <div className='main'>
+     
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+       <Guru gurus={guru} removeGuru={removeGuru}></Guru>
     </div>
-  );
-}
+  </div>
+  )
+};
 
 export default App;
